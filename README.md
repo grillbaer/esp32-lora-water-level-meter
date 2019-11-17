@@ -15,5 +15,8 @@ Measurement procedure:
 * stop pump, open valve
 
 TODO
+* Drawing of set-up
+* Schematic
+* Images of components, installation, ...
 * LoRa transmission
 * power management for battery operation
