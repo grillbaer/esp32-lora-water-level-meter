@@ -1,22 +1,31 @@
-# esp32-lora-water-level-meter
-Automated measurement of fountain water level with LoRa transmission based on ESP32
+# Water Level Meter
 
-Measurement of a fountain's water level. Set-up:
-* a tube with its end fixed in the fountain below the lowest expected water level
-* pumping air into the tube until it bubbles out of its lower end
-* the air pressure in the tube will then be proportional to the forced out water column height
-* pump, valve and pressure sensor are taken from a cheap blood pressure monitor
-* an ADS1115 analog-to-digital converter is used to measure the small sensor voltage
+Automated measurement of a fountain's water level with LoRa transmission, based on ESP32.
 
-Measurement procedure:
-* read the zero pressure while the tube is filled with water (pump off, valve open)
-* start pump, measure repeatedly until pressure stops increasing - this means that the tube is now completely filled with air
-* the finally measured level is the difference between these two preasures expressed as water column height (minus adjustment for the pressure loss in the tubing)
-* stop pump, open valve
+## Measurement Setup
+
+A tube is fixed in the fountain with its end below the lowest expected water level. 
+A pump blows air into the tube until it bubbles out of the lower end.
+Then, the air pressure in the tube will be proportional to the forced-out water column height. 
+The pump must be strong enough for the highest expected water level.
+
+The idea for this principle is taken from this [discussion thread](https://www.mikrocontroller.net/topic/229838).
+
+![The Measurement Setup](doc/measurement-setup.png)
+
+A one-way valve may be used at the lower tube's end to avoid intrusion of dirt and to shorten the required pumping duration in order to prolong battery life. 
+
+Pump, valve and pressure sensor can be taken from a cheap blood pressure monitor. An ADS1115 16 bit ADC is used to measure the small sensor voltage. An ESP32 µC controls the measurement procedure and transmits the result.
+
+## Measurement Procedure
+1. Ensure that the water level in the tube had time to relax while the pump was off and the valve open.
+2. Read the zero level pressure.
+3. Close valve, start pump and measure repeatedly until the pressure stops increasing. This means that the tube is now completely filled with air... or the pump was not strong enough:-)
+4. The result level above the lower end of the tube is the difference between these two pressures, converted into water column height. Depending on the length and diameter of the tube, it may need some minor offset correction to compensate for the pressure loss of the flowing air.
+5. Stop pump, open valve.
 
 TODO
-* Drawing of set-up
 * Schematic
-* Images of components, installation, ...
 * LoRa transmission
-* power management for battery operation
+* Power management for maximum battery life
+* Images of components, installation, ...
