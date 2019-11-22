@@ -13,9 +13,9 @@ The idea for this principle is taken from this [discussion thread](https://www.m
 
 ![The Measurement Setup](doc/measurement-setup.png)
 
-A one-way valve may be used at the lower tube's end to avoid intrusion of dirt and to shorten the required pumping duration in order to prolong battery life. 
+A one-way valve may be used in the tube to avoid intrusion of dirt and to shorten the required pumping duration to prolong battery life. Then, its placement must ensure that there is no permanent pressure at the sensor which could cause damage over time and also prevents measuring the zero pressure. The pressure loss caused by this valve must be compensated in the calcuation, too.
 
-Pump, valve and pressure sensor can be taken from a cheap blood pressure monitor. An ADS1115 16 bit ADC is used to measure the small sensor voltage. An ESP32 µC controls the measurement procedure and transmits the result.
+Pump, valve and pressure sensor can be taken from a cheap blood pressure monitor. An ADS1115 16 bit ADC is used to measure the small sensor voltage of some millivolts. An ESP32 µC controls the measurement procedure and transmits the result.
 
 ## Measurement Procedure
 1. Ensure that the water level in the tube had time to relax while the pump was off and the valve open.
