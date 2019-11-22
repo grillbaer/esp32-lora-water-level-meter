@@ -1,3 +1,5 @@
+![](https://github.com/grillbaer/esp32-lora-water-level-meter/workflows/build/badge.svg)
+  
 # Water Level Meter
 
 Automated measurement of a fountain's water level with LoRa transmission, based on ESP32.
