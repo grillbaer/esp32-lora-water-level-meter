@@ -32,11 +32,12 @@ Pump, valve and pressure sensor can be taken from a cheap blood pressure monitor
 LoRa module: HopeRF RFM95W, SX1276 compatible, and helix antenna for 868 MHz:
 
 Front
-![RFM95W Front](doc/lora-rf95w-front.jpg)
+
+<img src="doc/lora-rf95w-front.jpg" width=400>
 
 Back (horizontally flipped over)
-![RFM95W Back](doc/lora-rf95w-back.jpg)
 
+<img src="doc/lora-rf95w-front.jpg" width=400>
 
 ## TODO
 * Schematic
