@@ -2,6 +2,7 @@
 #include <Wire.h>
 #include "measure.h"
 #include "display.h"
+#include "lora.h"
 #include "config.h"
 
 void setup() {
@@ -9,6 +10,7 @@ void setup() {
   Wire.begin(PIN_I2C_DATA, PIN_I2C_CLOCK, ADC_I2C_FREQ);
   setupMeasure();
   setupDisplay();
+  lora_init();
 }
 
 void loop() {
