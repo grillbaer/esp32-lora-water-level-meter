@@ -1,10 +1,6 @@
 #include "config.h"
 #include "lora.h"
 
-// credentials.h must contain the LoRa euis and secrets:
-//   const char *devEui = "XXXXXXXXXXXXXXXX";
-//   const char *appEui = "XXXXXXXXXXXXXXXX";
-//   const char *appKey = "XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX";
 #include "credentials.h"
 
 #include "freertos/FreeRTOS.h"
