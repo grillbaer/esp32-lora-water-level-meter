@@ -1,3 +1,4 @@
 #pragma once
 
-void lora_init(void);
+void setupLora(void);
+void sendMeasurement(double levelMeters);

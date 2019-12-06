@@ -1,4 +1,4 @@
 #pragma once
 
-void setupMeasure();
+void setupMeasurement();
 double measureLevelMeters();

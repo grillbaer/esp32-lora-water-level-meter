@@ -44,3 +44,6 @@
 #define TTN_PIN_RST       2
 #define TTN_PIN_DIO0      39
 #define TTN_PIN_DIO1      16
+
+// Measurement and transmission interval
+#define MEASUREMENT_INTERVAL_MILLIS  120000       // high enough for 35ms airtime to stay below 30s/day

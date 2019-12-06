@@ -5,7 +5,7 @@
 
 Adafruit_ADS1115 ads(0x48); // ADDR to GND
 
-void setupMeasure(void) {
+void setupMeasurement() {
     ads.setGain(ADC_GAIN);    
     ads.begin();
   
