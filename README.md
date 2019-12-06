@@ -2,7 +2,7 @@
   
 # Water Level Meter
 
-Automated measurement of a fountain's water level with LoRa transmission, based on ESP32.
+Automated measurement of a well's water level with LoRa transmission, based on ESP32.
 
 ## Measurement Setup
 
@@ -27,13 +27,15 @@ Pump, valve and pressure sensor can be taken from a cheap blood pressure monitor
 4. The result level above the lower end of the tube is the difference between these two pressures, converted into water column height. Depending on the length and diameter of the tube, it may need some minor offset correction to compensate for the pressure loss of the flowing air.
 5. Stop pump, open valve.
 
-## LoRaWAN
+## LoRaWAN / TTN
 
 LoRa module: HopeRF RFM95W, SX1276 compatible, and helix antenna for 868 MHz
 
 Front / Back horizontally flipped over:
 
 <img src="doc/lora-rf95w-front.jpg" width=300> <img src="doc/lora-rf95w-back.jpg" width=300>
+
+Library: [ttn-esp32](https://github.com/manuelbl/ttn-esp32) is really easy to use and should have fewer timing problems on ESP32 than Arduino LMIC, since it is based on ESP-IDF/FreeRTOS tasks. Although it needs ESP-IDF, it can still be used together with the Arduino libs because these are also based on ESP-IDF. A `lib_compat_mode = off` in `platform.ini` enables usage with framework `arduino`.
 
 ## Hardware
 
@@ -43,6 +45,11 @@ First working prototype:
 
 ## TODO
 * Schematic
-* LoRa transmission, TTN
+* PCB
+* Details on used blood pressure monitor components
 * Power management for maximum battery life
+  * Select other ESP board without OLED and peripheral components?
+  * Go to light sleep or even deep sleep between measurements (can DevAddr and FrameCounter be held in NVS?)
+  * The sensor is already on a separate power strand to decouple its voltage from the noisy µC
+  * Power off the LoRa module? Is its voltage supply from ESP board sufficient?
 * Images of components, installation, ...
