@@ -13,7 +13,7 @@ The pump must be strong enough for the highest expected water level.
 
 The idea for this principle is taken from this [discussion thread](https://www.mikrocontroller.net/topic/229838).
 
-![The Measurement Setup](doc/measurement-setup.png)
+<img src="doc/measurement-setup.png">
 
 A one-way valve may be used in the tube to avoid intrusion of dirt and to shorten the required pumping duration to prolong battery life. Then, its placement must ensure that there is no permanent pressure at the sensor which could cause damage over time and also prevents measuring the zero pressure. The pressure loss caused by this valve must be compensated in the calcuation, too.
 
@@ -39,17 +39,31 @@ Library: [ttn-esp32](https://github.com/manuelbl/ttn-esp32) is really easy to us
 
 ## Hardware
 
-First working prototype:
+### First working prototype
 
 <img src="doc/breadboard-prototype-1.jpg" width=600>
 
+### Power Consumption
+
+Current of measurement cycle, LoRa TTN join and transmission:
+
+* Pump and value active: ~ 0.6 s &ndash; 2 s depending on water level
+* LoRa transmission active: ~ 0.1 s
+* Full active phase without TTN join (only necessary once): ~ 7 s 
+
+<img src="doc/prototype-current.png" width=600>
+
 ## TODO
+
 * Schematic
 * PCB
 * Details on used blood pressure monitor components
 * Power management for maximum battery life
   * Select other ESP board without OLED and peripheral components?
+    => see [esp32-power-consumption-test](https://github.com/grillbaer/esp32-power-consumption-test)
   * Go to light sleep or even deep sleep between measurements (can DevAddr and FrameCounter be held in NVS?)
   * The sensor is already on a separate power strand to decouple its voltage from the noisy µC
   * Power off the LoRa module? Is its voltage supply from ESP board sufficient?
+  * Battery life estimation
+    => see [battery-consumption.ods](doc/battery-consumption.ods)
 * Images of components, installation, ...
