@@ -21,17 +21,17 @@
 #define ADC_GAIN             GAIN_SIXTEEN           // 16x gain  +/- 0.256V  1 bit = 0.0078125mV
 #define ADC_VOLT_PER_BIT     0.0078125e-3           // [V/bit] ADC resolution
 #define SENSOR_VCC           3.25                   // [V] at sensor bridge
-#define VOLT_PER_METER       (SENSOR_VCC * 4.05e-3) // [V/m] sensor voltage depending on water level (pressure)
-#define TUBING_OFFSET_METERS -0.06                  // [m] level offset correction for tubings pressure loss
+#define VOLT_PER_METER       (SENSOR_VCC * 4.11e-3) // [V/m] sensor voltage depending on water level (pressure)
+#define TUBING_OFFSET_METERS -0.068                 // [m] level offset correction for tubings pressure loss
 
 // Measurement timing
 #define SENSOR_READY_MILLIS            100        // [ms] wait time for sensor ready
-#define PUMP_START_MILLIS             1000        // [ms] wait time for pump start
-#define PUMP_TIMEOUT_MILLIS          10000        // [ms] measure no longer than this
+#define PUMP_START_MILLIS              400        // [ms] wait time for pump start
+#define PUMP_TIMEOUT_MILLIS           3500        // [ms] measure no longer than this
 #define SINGLE_MEASURE_SAMPLES           9        // sample count for getting median
 #define SINGLE_MEASURE_INTV_MICROS    1000        // [us] between samples
-#define MEASURE_STABILIZE_LEVEL       0.01        // [m] max delta to assume a stabilized level
-#define MEASURE_STABILIZE_INTV_MILLIS  500        // [ms] between looking for stabilized level
+#define MEASURE_STABILIZE_LEVEL      0.002        // [m] max delta to assume a stabilized level
+#define MEASURE_STABILIZE_INTV_MILLIS  200        // [ms] between looking for stabilized level
 
 // LoRa RFM95W 
 #define TTN_SPI_HOST      HSPI_HOST
