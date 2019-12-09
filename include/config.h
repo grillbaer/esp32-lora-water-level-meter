@@ -6,8 +6,9 @@
 #define SERIAL_BAUD    115200
 
 // I2C display and ADC
-#define PIN_I2C_CLOCK  4
-#define PIN_I2C_DATA   5
+//#define USE_DISPLAY
+#define PIN_I2C_CLOCK  22
+#define PIN_I2C_DATA   21
 #define DISP_I2C_FREQ 1000000
 #define ADC_I2C_FREQ   400000
 
@@ -42,8 +43,8 @@
 #define TTN_PIN_NSS       15 // SPI CS
 #define TTN_PIN_RXTX      TTN_NOT_CONNECTED
 #define TTN_PIN_RST       2
-#define TTN_PIN_DIO0      39
-#define TTN_PIN_DIO1      16
+#define TTN_PIN_DIO0      16
+#define TTN_PIN_DIO1      17
 
 // Measurement and transmission interval
 #define MEASUREMENT_INTERVAL_MILLIS  120000       // high enough for 35ms airtime to stay below 30s/day

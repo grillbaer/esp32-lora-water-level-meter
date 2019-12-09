@@ -7,8 +7,13 @@
 #include "nvs_flash.h"
 
 #include "TheThingsNetwork.h"
+#include "TTNSession.h"
 
 static TheThingsNetwork ttn;
+
+// The session will persist over deep sleep,
+// it is used to avoid unnecessary joins
+static RTC_DATA_ATTR TTNSession session;
 
 void setupLora(void)
 {
@@ -36,28 +41,42 @@ void setupLora(void)
     // Configure the SX127x pins
     ttn.configurePins(TTN_SPI_HOST, TTN_PIN_NSS, TTN_PIN_RXTX, TTN_PIN_RST, TTN_PIN_DIO0, TTN_PIN_DIO1);
 
-    // The below line can be commented after the first run as the data is saved in NVS
-    ttn.provision(devEui, appEui, appKey);
-    //ttn.startProvisioningTask();
+    if (!ttn.isProvisioned())
+    {
+        ttn.provision(devEui, appEui, appKey);
+        //ttn.startProvisioningTask();
+    }
+
+    if (session.isValid())
+    {
+        Serial.println("Restoring TTN session:");
+        session.print();
+        session.writeToLMIC();
+    }
+    else
+    {
+        Serial.println("No valid TTN session found:");
+        session.print();
+    }
 }
 
-static bool joined = false;
 
 void sendMeasurement(double levelMeters)
 {
-    if (!joined)
+    if (!session.isValid())
     {
         Serial.println("Joining...");
         if (ttn.join())
         {
             Serial.println("Joined.");
-            joined = true;
+            Serial.println("Storing TTN session:");
+            session.readFromLMIC();
+            session.print();
         }
         else
         {
             Serial.println("Join failed.");
             ttn.reset();
-            joined = false;
         }
     }
 
@@ -70,4 +89,5 @@ void sendMeasurement(double levelMeters)
 
     TTNResponseCode res = ttn.transmitMessage(payload, 2);
     Serial.println(res == kTTNSuccessfulTransmission ? "LoRa transmitted." : " LoRa transmission failed.");
+    session.readSeqnoFromLMIC();
 }
