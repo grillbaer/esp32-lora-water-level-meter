@@ -47,11 +47,14 @@ Library: [ttn-esp32](https://github.com/manuelbl/ttn-esp32) is really easy to us
 
 Current of measurement cycle, LoRa TTN join and transmission:
 
-* Pump and value active: ~ 0.6 s &ndash; 2 s depending on water level
+* Pump and value active: ~ 0.6 s &ndash; 4 s depending on water level and pump voltage, higher pump voltage leads
+  to much shorter active phase
 * LoRa transmission active: ~ 0.1 s
-* Full active phase without TTN join (only necessary once): ~ 7 s 
+* Full active phase without TTN join (only necessary once): ~ 7 s
+* Deep sleep is much better when powered with 3.7 V instead of 5.0 V (voltage regulator?)
+* 3.7 leads to sometimes missing TTN join accept
 
-<img src="doc/prototype-current.png" width=600>
+<img src="doc/current-3.7V-1m.png" width=600>
 
 ## TODO
 
