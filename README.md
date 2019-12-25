@@ -6,14 +6,14 @@ Automated measurement of a well's water level with LoRa transmission, based on E
 
 ## Measurement Setup
 
+<img src="doc/measurement-setup.png">
+
 A tube is fixed in the fountain with its end below the lowest expected water level. 
 A pump blows air into the tube until it bubbles out of the lower end.
 Then, the air pressure in the tube will be proportional to the forced-out water column height. 
 The pump must be strong enough for the highest expected water level.
 
 The idea for this principle is taken from this [discussion thread](https://www.mikrocontroller.net/topic/229838).
-
-<img src="doc/measurement-setup.png">
 
 A one-way valve may be used in the tube to avoid intrusion of dirt and to shorten the required pumping duration to prolong battery life. Then, its placement must ensure that there is no permanent pressure at the sensor which could cause damage over time and also prevents measuring the zero pressure. The pressure loss caused by this valve must be compensated in the calcuation, too.
 
