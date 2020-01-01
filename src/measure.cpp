@@ -9,20 +9,6 @@ void setupMeasurement()
 {
     ads.setGain(ADC_GAIN);
     ads.begin();
-
-    // sensor voltage:
-    pinMode(PIN_SENSOR, OUTPUT);
-    digitalWrite(PIN_SENSOR, !SENSOR_ACTIVE);
-
-    // pump+valve voltage:
-    pinMode(PIN_PUMP, OUTPUT);
-    digitalWrite(PIN_PUMP, !PUMP_ACTIVE);
-}
-
-static void activateSensor(boolean active)
-{
-    Serial.printf("Sensor %s\n", active ? "ON" : "OFF");
-    digitalWrite(PIN_SENSOR, active ? SENSOR_ACTIVE : !SENSOR_ACTIVE);
 }
 
 static void activatePump(boolean active)
@@ -65,8 +51,6 @@ static double readLevelMeters(uint16_t samples, uint32_t intervalMicros)
 double measureLevelMeters()
 {
     // read zero level (sensor's resistor bridge error)
-    activateSensor(true);
-    delay(SENSOR_READY_MILLIS);
     double zeroLevel = readLevelMeters(SINGLE_MEASURE_SAMPLES, SINGLE_MEASURE_INTV_MICROS);
     Serial.printf("Zero level: %.3fm\n", zeroLevel);
 
@@ -89,7 +73,6 @@ double measureLevelMeters()
     } while (level - lastLevel > MEASURE_STABILIZE_LEVEL && cycle < maxCycles);
 
     activatePump(false);
-    activateSensor(false);
     ulong pumpStopMillis = millis();
 
     double finalLevel = level - zeroLevel + TUBING_OFFSET_METERS;

@@ -7,14 +7,17 @@
 
 // I2C display and ADC
 //#define USE_DISPLAY
-#define PIN_I2C_CLOCK  22
-#define PIN_I2C_DATA   21
+#define PIN_I2C_CLOCK  4
+#define PIN_I2C_DATA   2
 #define DISP_I2C_FREQ 1000000
 #define ADC_I2C_FREQ   400000
 
-// Measurement pins
-#define PIN_SENSOR    25
-#define SENSOR_ACTIVE HIGH
+// Peripherals voltage for sensor and LoRa
+#define PIN_PERIPHERALS          25
+#define PERIPHERALS_ACTIVE       HIGH
+#define PERIPHERALS_READY_MILLIS 800        // [ms] wait time for peripherals to be ready
+
+// Pump
 #define PIN_PUMP      26
 #define PUMP_ACTIVE   HIGH
 
@@ -26,7 +29,6 @@
 #define TUBING_OFFSET_METERS -0.068                 // [m] level offset correction for tubings pressure loss
 
 // Measurement timing
-#define SENSOR_READY_MILLIS            100        // [ms] wait time for sensor ready
 #define PUMP_START_MILLIS              400        // [ms] wait time for pump start
 #define PUMP_TIMEOUT_MILLIS           3500        // [ms] measure no longer than this
 #define SINGLE_MEASURE_SAMPLES           9        // sample count for getting median
@@ -43,8 +45,8 @@
 #define TTN_PIN_NSS       15 // SPI CS
 #define TTN_PIN_RXTX      TTN_NOT_CONNECTED
 #define TTN_PIN_RST       2
-#define TTN_PIN_DIO0      16
-#define TTN_PIN_DIO1      17
+#define TTN_PIN_DIO0      32
+#define TTN_PIN_DIO1      33
 
 // Measurement and transmission interval
-#define MEASUREMENT_INTERVAL_MILLIS  120000       // high enough for 35ms airtime to stay below 30s/day
+#define MEASUREMENT_INTERVAL_MILLIS  60000       // high enough for 35ms airtime to stay below 30s/day
