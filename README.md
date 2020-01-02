@@ -21,7 +21,7 @@ Pump, valve and pressure sensor can be taken from a cheap blood pressure monitor
 
 ## Measurement Procedure
 
-1. Ensure that the water level in the tube had time to relax while the pump was off and the valve open.
+1. Ensure that the pressure at the sensor had enough time to relax (pump off, valve open).
 2. Read the zero level pressure.
 3. Close valve, start pump and measure repeatedly until the pressure stops increasing. This means that the tube is now completely filled with air... or the pump was not strong enough:-)
 4. The result level above the lower end of the tube is the difference between these two pressures, converted into water column height. Depending on the length and diameter of the tube, it may need some minor offset correction to compensate for the pressure loss of the flowing air.
@@ -35,7 +35,9 @@ Front / Back horizontally flipped over:
 
 <img src="doc/lora-rf95w-front.jpg" width=300> <img src="doc/lora-rf95w-back.jpg" width=300>
 
-Library: [ttn-esp32](https://github.com/manuelbl/ttn-esp32) is really easy to use and should have fewer timing problems on ESP32 than Arduino LMIC, since it is based on ESP-IDF/FreeRTOS tasks. Although it needs ESP-IDF, it can still be used together with the Arduino libs because these are also based on ESP-IDF. A `lib_compat_mode = off` in `platform.ini` enables usage with framework `arduino`.
+Library: [ttn-esp32](https://github.com/manuelbl/ttn-esp32) is really easy to use and should have fewer timing problems on ESP32 than Arduino LMIC, since it is based on ESP-IDF/FreeRTOS tasks. Although it needs ESP-IDF, it can still be used together with the Arduino libs because these are also based on ESP-IDF. A `lib_compat_mode = off` in `platform.ini` enables its usage with framework `arduino`.
+
+Saving and restoring the LoRa state over deep sleep in RTC memory is done by [TTNSession](include/TTNSession.h).
 
 ### Payload
 
@@ -70,7 +72,7 @@ This is one measurement cycle with LoRa transmission (without join):
 
 <img src="doc/current-6.0V-1m.png" width=600>
 
-<img src="doc/current-6.0V-1m.png" width=600>
+<img src="doc/current-3.7V-1m.png" width=600>
 
 * Pump and value active ~ 0.6 s &ndash; 3.5 s depending on water level and pump voltage, higher pump voltage leads
   to much shorter active phase
@@ -85,7 +87,7 @@ Optimized prototype:
 
 ## Battery Monitoring
 
-To monitor the remaining battery voltage, it is fed into another free channel of the ADC using a voltage divider. It is powered from the switchable peripherals voltage before the regulator to avoid unnecessary battery drain. This causes a voltage loss of 30 to 40 mV which could be (but is not) compensated in the software as well as the resistor deviations.
+To monitor the remaining battery voltage, it is fed into another free channel of the ADC using a voltage divider. It is powered from the switchable peripherals voltage before the regulator to avoid unnecessary battery drain. The transistor switch causes a voltage loss of 30 to 40 mV which could be (but is not) compensated in the software as well as the resistor deviations.
 
 ## TODO
 
@@ -94,5 +96,5 @@ To monitor the remaining battery voltage, it is fed into another free channel of
 * Details on used blood pressure monitor components
 * Which battery to use for 1a without replacement?
 * Images of components, installation, ...
-* Got to sleep also after failed join, try join next time. Joins are not really reliable... or completely go to
+* Go to sleep also after failed join, try join next time. Joins are not really reliable... or completely go to ABP and try to store frame counter in NVM
 * Document and link used libraries and components
