@@ -11,8 +11,8 @@
 
 static TheThingsNetwork ttn;
 
-// The session will persist over deep sleep,
-// it is used to avoid unnecessary joins
+// The session must persist over deep sleep,
+// it is required to avoid unnecessary joins
 static RTC_DATA_ATTR TTNSession session;
 
 void setupLora(void)
@@ -60,8 +60,7 @@ void setupLora(void)
     }
 }
 
-
-void sendMeasurement(double levelMeters)
+void sendMeasurement(double levelMeters, double batteryVoltage)
 {
     if (!session.isValid())
     {
@@ -80,14 +79,17 @@ void sendMeasurement(double levelMeters)
         }
     }
 
-    Serial.printf("LoRa transmitting %.3lf...\n", levelMeters);
+    Serial.printf("LoRa transmitting level=%.3lfm, battery=%.3lfV...\n", levelMeters, batteryVoltage);
 
-    const int16_t millimeters = (int16_t)(levelMeters * 1000 + 0.5);
-    uint8_t payload[2];
-    payload[0] = millimeters >> 8;
-    payload[1] = millimeters & 0xff;
+    const int16_t level_mm = (int16_t)(levelMeters * 1000 + 0.5);
+    const int16_t battery_mV = (int16_t)(batteryVoltage * 1000 + 0.5);
+    uint8_t payload[4];
+    payload[0] = level_mm >> 8;
+    payload[1] = level_mm & 0xff;
+    payload[2] = battery_mV >> 8;
+    payload[3] = battery_mV & 0xff;
 
-    TTNResponseCode res = ttn.transmitMessage(payload, 2);
+    TTNResponseCode res = ttn.transmitMessage(payload, sizeof(payload));
     Serial.println(res == kTTNSuccessfulTransmission ? "LoRa transmitted." : " LoRa transmission failed.");
     session.readSeqnoFromLMIC();
 }

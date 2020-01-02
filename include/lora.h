@@ -1,4 +1,4 @@
 #pragma once
 
 void setupLora(void);
-void sendMeasurement(double levelMeters);
+void sendMeasurement(double levelMeters, double batteryVoltage);
