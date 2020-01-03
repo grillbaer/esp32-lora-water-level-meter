@@ -1,0 +1,3 @@
+(sym_lib_table
+  (lib (name dev-boards)(type Legacy)(uri C:/dev/git/esp32-lora-water-level-meter/hardware/kicad/lib/dev-boards.lib)(options "")(descr ""))
+)

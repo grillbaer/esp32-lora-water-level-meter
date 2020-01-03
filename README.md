@@ -89,9 +89,14 @@ Optimized prototype:
 
 To monitor the remaining battery voltage, it is fed into another free channel of the ADC using a voltage divider. It is powered from the switchable peripherals voltage before the regulator to avoid unnecessary battery drain. The transistor switch causes a voltage loss of 30 to 40 mV which could be (but is not) compensated in the software as well as the resistor deviations.
 
+## Schematic
+
+KiCad circuit diagram:
+
+<img src="doc/circuit-diagram.png" width=600>
+
 ## TODO
 
-* Schematic
 * PCB
 * Details on used blood pressure monitor components
 * Which battery to use for 1a without replacement?
